@@ -5,7 +5,8 @@ int yewlow = 4;
 int blue = 6;
 int replay = 8; // may bom
 int FanRelay = 10;
-
+int quangTro = 12;
+int ledQuangTro = 13;
 void setup() {
   Serial.begin(115200);
   pinMode(red,OUTPUT);
@@ -13,15 +14,19 @@ void setup() {
   pinMode(blue,OUTPUT);
   pinMode(replay,OUTPUT);
   pinMode(FanRelay,OUTPUT);
-  sCmd.addCommand("LED_RED_PIN",   led_red); 
-  sCmd.addCommand("LED_YEWLOW_PIN",   led_yewlow); 
-  sCmd.addCommand("LED_BLUE_PIN",   led_blue); 
-  sCmd.addCommand("T_RELAY_PIN",   led_replay);   
-  sCmd.addCommand("FAN_RELAY",   replayFan); 
+  pinMode(quangTro,INPUT);
+  pinMode(ledQuangTro,OUTPUT);
+  sCmd.addCommand("RED_LED",   led_red); 
+  sCmd.addCommand("YEWLOW_LED",   led_yewlow); 
+  sCmd.addCommand("BLUE_LED",   led_blue); 
+  sCmd.addCommand("BOM_REPLAY",   led_replay);   
+  sCmd.addCommand("QUAT_REPLAY",   replayFan); 
 }
  
 void loop() {
   sCmd.readSerial();
+  int gtQuangTro = digitalRead(quangTro);
+  digitalWrite(ledQuangTro, gtQuangTro);
 }
  
 
